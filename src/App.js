@@ -1,12 +1,17 @@
 import { useState } from "react";
-import logo from './logo.svg';
 import './App.css';
 
 const App = ({ practices }) => {
+  const [practiceIndex, setPracticeIndex] = useState(0);
+
+  const contentChange = (e) => {
+    setPracticeIndex(e.target.value)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <select className="App-select">
+        <select className="App-select" value={practiceIndex} onChange={contentChange}>
           {practices.map((name, index) => (
             <option key={name} value={index}>
               {name}
