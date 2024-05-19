@@ -46,6 +46,20 @@
   color: #ffa6a6;
 }
 
+.todo-form {
+  text-align: left;
+}
+
+.todo-form input {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.todo-form button {
+  padding: 5px;
+  margin: auto;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
