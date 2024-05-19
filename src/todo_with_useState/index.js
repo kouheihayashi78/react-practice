@@ -1,4 +1,6 @@
 import { useState } from "react";
+import List from "./components/List"
+import Form from "./components/Form"
 
 // 関数がコンポーネントであれば大文字から始める必要がある
 const TodoState = () => {
@@ -8,11 +10,19 @@ const TodoState = () => {
       content: "日記",
       status: false,
     },
+    {
+      id: 2,
+      content: "React学習",
+      status: false,
+    },
+    {
+      id: 3,
+      content: "Python学習",
+      status: false,
+    },
   ];
 
   const [todos, setTodos] = useState(todoList);
-  // inputで入力した値を格納するために記述
-  const [enteredTodo, setEnteredTodo] = useState("");
 
   // todo削除用の関数
   const deleteTaskAfterClick = (id) => {
@@ -24,49 +34,16 @@ const TodoState = () => {
   };
 
   // todo追加用の関数
-  const addTodo = (e) => {
-    // フォームが持つデフォルトの動作をキャンセルし、ページのリロードを防ぐ
-    e.preventDefault();
-    // input欄が入力されているならtodoを追加する
-    if (enteredTodo !== "" || enteredTodo.match(/\S/g)) {
-      const newTodo = {
-        id: Math.floor(Math.random() * 1e5),
-        content: enteredTodo,
-      };
-
-      // todosを展開した上で新しいtodoを追加する
-      setTodos([...todos, newTodo]);
-
-      setEnteredTodo("");
-    }
-  };
+  const createTask = (newTodo) => {
+    setTodos([...todos, newTodo]);
+  }
 
   return (
     // <>は<React.Fragment>の省略形
     <>
       <h3 className="todo-title">シンプルなtodoリスト(useState版)</h3>
-      {todos.map((todo) => {
-        return (
-          // keyを指定することでReactは各要素を一意に識別する
-          <div className="todo-content" key={todo.content}>
-            <button
-              type="checkbox"
-              onClick={() => deleteTaskAfterClick(todo.id)}
-            >
-              完了
-            </button>
-            <span>{todo.content}</span>
-          </div>
-        );
-      })}
-      <form onSubmit={addTodo} className="todo-form">
-        <input
-          type="text"
-          value={enteredTodo}
-          onChange={(e) => setEnteredTodo(e.target.value)}
-        />
-        <button>追加</button>
-      </form>
+      <List todos={todos} deleteTaskAfterClick={deleteTaskAfterClick}/>
+      <Form createTask={createTask}/>
     </>
   );
 };
