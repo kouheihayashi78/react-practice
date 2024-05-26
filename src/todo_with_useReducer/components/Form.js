@@ -5,14 +5,16 @@ const Form = ({ createTodo }) => {
   const addTodo = (e) => {
     e.preventDefault();
 
-    const newTodo = {
-      id: Math.floor(Math.random() * 1e5),
-      content: enteredTodo,
-    };
+    if (enteredTodo !== "" || enteredTodo.match(/\S/g)) {
+      const newTodo = {
+        id: Math.floor(Math.random() * 1e5),
+        content: enteredTodo,
+      };
 
-    createTodo(newTodo);
+      createTodo(newTodo);
 
-    setEnteredTodo("");
+      setEnteredTodo("");
+    }
   };
   return (
     <div>
