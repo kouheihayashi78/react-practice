@@ -3,7 +3,7 @@ import './App.css';
 
 const Loader = ({ practice }) => {
   // lazyをコンポーネントの外部で呼び出し、遅延読み込みされるReactコンポーネントを宣言
-  const LazyComponent = lazy(() => import(`./${practice}`));
+  const LazyComponent = lazy(() => import(`./${practice}/index`));
 
   return (
     // Suspenseはコンポーネント内で非同期な操作完了するまで、ローディング状態を管理（遅延）する
