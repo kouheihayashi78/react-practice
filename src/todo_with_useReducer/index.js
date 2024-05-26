@@ -1,10 +1,16 @@
+import Todo from "./components/Todo";
 
-const todoReducer = () => {
-    return(
-        <>
-            <h1>todo_with_useReducer</h1>
-        </>
-    )
-}
+const Example = () => {
+  return (
+    <>
+      <h3 className="todo-title">
+        シンプルなtodoリスト
+        <br />
+        (useReducerとuseContext使用)
+      </h3>
+      <Todo />
+    </>
+  );
+};
 
-export default todoReducer
+export default Example;
