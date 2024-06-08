@@ -30,8 +30,17 @@ const counter = createSlice({
     })
     .addCase(addAsyncWithStatus.rejected, (state) => {
       state.status = '読み込みが失敗しました。'
+    });
+    builder.addCase(minusAsyncWithStatus.pending, (state) => {
+      state.status = '読み込み中...'
     })
-    
+    .addCase(minusAsyncWithStatus.fulfilled, (state, {payload}) => {
+      state.status = '読み込み完了！'
+      state.count = state.count - payload
+    })
+    .addCase(minusAsyncWithStatus.rejected, (state) => {
+      state.status = '読み込みが失敗しました。'
+    }) ;
   }
 });
 
@@ -47,15 +56,14 @@ const addAsyncWithStatus = createAsyncThunk(
   }
 )
 
-const addAsync = (payload) => {
-  return async (dispatch, getState) => {
-    const state = getState();
-    console.log(state);
+const minusAsyncWithStatus = createAsyncThunk(
+  'asyncMinusCount', // ここはtypeで一意に設定する必要がある
+  async (payload) => {
     const response = await asyncCount(payload);
-    dispatch(add(response.data));
+    return response.data;
   }
-}
+)
 
 
-export { add, minus, addAsync, addAsyncWithStatus }
+export { add, minus, addAsyncWithStatus, minusAsyncWithStatus }
 export default counter.reducer
