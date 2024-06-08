@@ -4,24 +4,6 @@ import todoApi from "../api/todo";
 const TodoContext = createContext();
 const TodoDispatchContext = createContext();
 
-const todosList = [
-  {
-    id: 1,
-    content: "店予約する",
-    editing: false,
-  },
-  {
-    id: 2,
-    content: "卵買う",
-    editing: false,
-  },
-  {
-    id: 3,
-    content: "郵便出す",
-    editing: false,
-  },
-];
-
 const todoReducer = (todos, action) => {
   switch (action.type) {
     case "todo/init":
